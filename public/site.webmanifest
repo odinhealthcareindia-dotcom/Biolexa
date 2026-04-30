@@ -1,0 +1,27 @@
+{
+    "name": "BioLexa",
+    "short_name": "BioLexa",
+    "description": "Intelligent Healthcare Solutions and Pharmaceutical Products",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FF3333",
+    "orientation": "portrait-primary",
+    "icons": [{
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "categories": ["healthcare", "business"],
+    "screenshots": [{
+        "src": "/screenshot-1.png",
+        "type": "image/png",
+        "sizes": "540x720"
+    }]
+}

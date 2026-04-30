@@ -1,0 +1,10 @@
+# Allow search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow admin and private paths (if any)
+Disallow: /admin
+Disallow: /private
+
+# Sitemap location
+Sitemap: https://biolexa.in/sitemap.xml
