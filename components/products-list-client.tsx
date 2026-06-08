@@ -5,6 +5,7 @@ import { Filter, Search } from "lucide-react"
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import { type Product, generateSlug } from "@/utils/products"
+import EnquiryModal from "@/components/EnquiryModal"
 
 const ease = [0.25, 0.1, 0.25, 1] as const
 
@@ -29,6 +30,17 @@ export default function ProductsListClient({ products }: ProductsListClientProps
   const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null)
   const [selectedSubSubCategory, setSelectedSubSubCategory] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+
+  function openModal(product: Product) {
+    setSelectedProduct(product)
+    setIsModalOpen(true)
+  }
+
+  function closeModal() {
+    setIsModalOpen(false)
+  }
 
   const categoryMap = useMemo(() => {
     const map = new Map<string, Map<string, Set<string>>>()
@@ -109,7 +121,7 @@ export default function ProductsListClient({ products }: ProductsListClientProps
               transition={{ duration: 0.5, delay: 0.1, ease }}
               className="lg:col-span-1"
             >
-              <div className="sticky top-24 bg-[var(--color-surface)] p-6 rounded-xl border border-[var(--color-border)]">
+              <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto bg-[var(--color-surface)] p-6 rounded-xl border border-[var(--color-border)]">
                 <div className="flex items-center gap-2 mb-6">
                   <Filter size={20} className="text-[var(--color-primary)]" />
                   <h2 className="text-xl font-semibold text-[var(--color-text-primary)]">Categories</h2>
@@ -226,14 +238,15 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                         <span className="inline-block px-3 py-1 text-xs font-medium bg-[var(--color-secondary)] text-white rounded-full">
                           {product.Category}
                         </span>
-                        <a
-                          href={`https://wa.me/9218630464?text=Hi%20can%20I%20Know%20more%20about%20${product.Name}%20${product.Category}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openModal(product)
+                          }}
                           className="hover:text-[var(--color-primary-hover)] transition-colors"
                         >
                           <span className="text-sm font-bold text-[var(--color-primary)]">Know More</span>
-                        </a>
+                        </button>
                       </div>
                       <Link href={`/products/${generateSlug(product.Name)}`}>
                         <button
@@ -261,6 +274,8 @@ export default function ProductsListClient({ products }: ProductsListClientProps
           </div>
         </div>
       </section>
+
+      <EnquiryModal isOpen={isModalOpen} onClose={closeModal} product={selectedProduct} />
     </main>
   )
 }
