@@ -118,7 +118,7 @@ export default function EnquiryModal({ isOpen, onClose, product }: EnquiryModalP
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60"
+            className="fixed inset-0 z-50 bg-black/60 h-screen"
             aria-hidden="true"
           />
 
@@ -135,11 +135,11 @@ export default function EnquiryModal({ isOpen, onClose, product }: EnquiryModalP
             aria-labelledby="enquiry-modal-title"
           >
             <div
-              className="pointer-events-auto w-full sm:max-w-md bg-[var(--color-surface)] border border-[var(--color-border)] rounded-t-2xl sm:rounded-xl shadow-2xl"
+              className="pointer-events-auto w-full sm:max-w-md bg-[var(--color-surface)] border border-[var(--color-border)] rounded-t-2xl sm:rounded-xl shadow-2xl flex flex-col max-h-[90dvh] sm:max-h-[85dvh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-start justify-between p-6 pb-4 border-b border-[var(--color-border)]">
+              <div className="flex items-start justify-between p-6 pb-4 border-b border-[var(--color-border)] shrink-0">
                 <div>
                   <h2
                     id="enquiry-modal-title"
@@ -161,7 +161,7 @@ export default function EnquiryModal({ isOpen, onClose, product }: EnquiryModalP
               </div>
 
               {/* Form */}
-              <form onSubmit={handleSubmit} noValidate className="p-6 space-y-4">
+              <form onSubmit={handleSubmit} noValidate className="p-6 space-y-4 overflow-y-auto">
                 {/* Name */}
                 <div>
                   <label htmlFor="enq-name" className={labelClass}>
