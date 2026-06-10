@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import { Toaster } from "react-hot-toast"
 import CollapsibleDownloadButton from "@/components/collapsible-download-button"
 import { ThemeProvider } from "@/components/theme-provider"
+import ChatBot from "@/components/ChatBot"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -127,6 +128,7 @@ export default function RootLayout({
           <Toaster position="top-right" />
           <CollapsibleDownloadButton />
           <Footer />
+          <ChatBot />
         </ThemeProvider>
       </body>
     </html>
