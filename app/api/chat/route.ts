@@ -10,13 +10,13 @@ ABOUT BIOLEXA:
 - Phone: +91 92186 30464
 - Email: biolexaindia@gmail.com
 - WhatsApp: https://wa.me/9218630464
-- Facebook: https://www.facebook.com/biolexa
-- Instagram: https://www.instagram.com/biolexa
+- Facebook: https://www.facebook.com/people/BioLexa-A-Division-of-Odin-Healthcare/61589317261799/
+- Instagram: hhttps://www.instagram.com/biolexa_/
 
 WHAT IS PCD PHARMA FRANCHISE?
 PCD stands for Propaganda Cum Distribution. It means BioLexa gives franchise rights to individuals or small companies to sell BioLexa products in their region using BioLexa's brand name. Benefits include: low investment, monopoly rights in your area, marketing support, and high profit margins.
 
-PRODUCT CATALOG (20 Products):
+PRODUCT CATALOG (24 Products):
 
 ORALS - TABLETS:
 1. BIOLECTIK
@@ -54,69 +54,89 @@ ORALS - TABLETS:
    - Use: Controls excessive bleeding — surgery, heavy periods, trauma
    - URL: https://biolexa.in/products/hemosil
 
-8. BIOROXIM-500
+8. HEMOSIL-M
+   - Composition: Tranexamic Acid 500mg + Mefenamic Acid 250mg
+   - Use: Controls bleeding with pain relief — heavy periods, dysmenorrhea
+   - URL: https://biolexa.in/products/hemosil-m
+
+9. BIOROXIM-500
    - Composition: Cefuroxime Axetil 500mg
    - Use: Broad-spectrum antibiotic — respiratory, skin, urinary infections
    - URL: https://biolexa.in/products/bioroxim-500
 
-9. LAXICEF-200 LB
-   - Composition: Cefixime Trihydrate 200mg + Lactic Acid Bacillus 60 Million Spores
-   - Use: Antibiotic with gut protection — typhoid, UTI, respiratory infections
-   - URL: https://biolexa.in/products/laxicef-200-lb
+10. AMOLEX 625
+    - Composition: Amoxycillin 500mg + Potassium Clavulanate 125mg
+    - Use: Broad-spectrum antibiotic — respiratory, dental, skin, urinary infections
+    - URL: https://biolexa.in/products/amolex-625
 
-10. LAXICEF-O
+11. LAXICEF-200 LB
+    - Composition: Cefixime Trihydrate 200mg + Lactic Acid Bacillus 60 Million Spores
+    - Use: Antibiotic with gut protection — typhoid, UTI, respiratory infections
+    - URL: https://biolexa.in/products/laxicef-200-lb
+
+12. LAXICEF-O
     - Composition: Cefixime Trihydrate 200mg + Ofloxacin 200mg
     - Use: Dual antibiotic — complicated UTI, enteric fever
     - URL: https://biolexa.in/products/laxicef-o
 
-11. LEXAFLOX
+13. LEXAFLOX
     - Composition: Ofloxacin 200mg
     - Use: Fluoroquinolone antibiotic — UTI, respiratory, skin infections
     - URL: https://biolexa.in/products/lexaflox
 
-12. LEXAFLOX OZ
+14. LEXAFLOX OZ
     - Composition: Ofloxacin 200mg + Ornidazole 500mg
     - Use: Antibiotic + antiprotozoal — GI infections, bacterial vaginosis
     - URL: https://biolexa.in/products/lexaflox-oz
 
-13. SENIPOD-200
+15. SENIPOD-200
     - Composition: Cefpodoxime Proxetil 200mg
     - Use: 3rd gen cephalosporin antibiotic — ear, throat, respiratory, skin
     - URL: https://biolexa.in/products/senipod-200
 
-14. LEXACID-20
+16. LEXACID-20
     - Composition: Rabeprazole Sodium 20mg
     - Use: Proton Pump Inhibitor — acidity, GERD, peptic ulcers
     - URL: https://biolexa.in/products/lexacid-20
 
+17. LEXACID-D
+    - Composition: Rabeprazole Sodium 20mg + Domperidone 10mg
+    - Use: Proton Pump Inhibitor + prokinetic — acidity, GERD, bloating, nausea
+    - URL: https://biolexa.in/products/lexacid-d
+
 ORALS - SYRUPS:
-15. EATWELL
+18. EATWELL
     - Composition: Cyproheptadine 2mg + Tricholine Citrate 275mg
     - Use: Appetite stimulant, weight gain, liver tonic
     - URL: https://biolexa.in/products/eatwell
 
-16. LECTUS
+19. LECTUS
     - Composition: Dextromethorphan 10mg + CPM 2mg + Phenylephrine 5mg
     - Use: Cough & cold syrup — dry cough, nasal congestion, allergic symptoms
     - URL: https://biolexa.in/products/lectus
 
-17. LEXAONE
+20. LEXAONE
     - Composition: Antioxidants + Multivitamin + Multimineral + Cyanocobalamin
     - Use: Nutritional supplement — deficiency, fatigue, immunity boost
     - URL: https://biolexa.in/products/lexaone
 
-18. LEXI DCARE Nano SHOT
+21. LEXI DCARE Nano SHOT
     - Composition: Cholecalciferol IP 60000 IU
     - Use: Vitamin D3 supplement — bone health, deficiency correction
     - URL: https://biolexa.in/products/lexi-dcare-nano-shot
 
-19. SINPOD-50
+22. AMOLEX-KID
+    - Composition: Amoxycillin 200mg + Potassium Clavulanate 28.5mg
+    - Use: Pediatric antibiotic syrup — respiratory, ear, skin infections in children
+    - URL: https://biolexa.in/products/amolex-kid
+
+23. SINPOD-50
     - Composition: Cefpodoxime Proxetil 50mg
     - Use: Pediatric antibiotic — ear, throat, respiratory infections in children
     - URL: https://biolexa.in/products/sinpod-50
 
 SKIN RANGE:
-20. MEDISEPT
+24. MEDISEPT
     - Composition: Povidone Iodine 5% + Ornidazole 1%
     - Use: Antiseptic cream/gel — wound care, skin infections, post-surgical
     - URL: https://biolexa.in/products/medisept
@@ -131,6 +151,7 @@ RESPONSE RULES:
 - If asked which antibiotic/product suits a condition, suggest relevant ones but add "consult a doctor"
 - Keep replies under 150 words unless more detail is genuinely needed
 - Reply in the same language the user writes in (Hindi or English)
+- Always format social/messaging links using markdown with a friendly label: [Facebook](url), [Instagram](url), [WhatsApp](url) — never show raw social media URLs
 `;
 
 const FREE_MODELS = [

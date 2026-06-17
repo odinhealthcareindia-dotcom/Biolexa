@@ -4,6 +4,62 @@ import { useState, useRef, useEffect } from "react";
 
 type Message = { role: "user" | "assistant"; content: string };
 
+function renderMessage(content: string) {
+  const regex = /\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|\+91\s?\d{5}\s?\d{5}/g;
+  const elements: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(content)) !== null) {
+    if (match.index > lastIndex) {
+      elements.push(<span key={lastIndex}>{content.slice(lastIndex, match.index)}</span>);
+    }
+
+    const full = match[0];
+    const key = match.index;
+
+    if (match[1] !== undefined) {
+      // **bold**
+      elements.push(<strong key={key}>{match[1]}</strong>);
+    } else if (match[2] !== undefined && match[3] !== undefined) {
+      // [text](url)
+      elements.push(
+        <a key={key} href={match[3]} target="_blank" rel="noopener noreferrer" className="text-red-600 underline break-all hover:text-red-800">
+          {match[2]}
+        </a>
+      );
+    } else if (/^https?:\/\//.test(full)) {
+      elements.push(
+        <a key={key} href={full} target="_blank" rel="noopener noreferrer" className="text-red-600 underline break-all hover:text-red-800">
+          {full}
+        </a>
+      );
+    } else if (full.includes("@")) {
+      elements.push(
+        <a key={key} href={`mailto:${full}`} className="text-red-600 underline hover:text-red-800">
+          {full}
+        </a>
+      );
+    } else if (full.startsWith("+91")) {
+      elements.push(
+        <a key={key} href={`tel:${full.replace(/\s/g, "")}`} className="text-red-600 underline hover:text-red-800">
+          {full}
+        </a>
+      );
+    } else {
+      elements.push(<span key={key}>{full}</span>);
+    }
+
+    lastIndex = match.index + full.length;
+  }
+
+  if (lastIndex < content.length) {
+    elements.push(<span key={lastIndex}>{content.slice(lastIndex)}</span>);
+  }
+
+  return elements;
+}
+
 const SUGGESTIONS = [
   "What antibiotics do you have?",
   "Tell me about PCD franchise",
@@ -140,7 +196,7 @@ export default function ChatBot() {
                   }`}
                   style={m.role === "user" ? { backgroundColor: "#FF3333" } : {}}
                 >
-                  {m.content}
+                  {m.role === "assistant" ? renderMessage(m.content) : m.content}
                 </div>
               </div>
             ))}

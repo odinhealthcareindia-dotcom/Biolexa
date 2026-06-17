@@ -1,9 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Filter, Search } from "lucide-react"
+import { Filter, Search, Send } from "lucide-react"
 import { useState, useMemo } from "react"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { type Product, generateSlug } from "@/utils/products"
 import EnquiryModal from "@/components/EnquiryModal"
 
@@ -26,6 +26,7 @@ interface ProductsListClientProps {
 }
 
 export default function ProductsListClient({ products }: ProductsListClientProps) {
+  const router = useRouter()
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null)
   const [selectedSubSubCategory, setSelectedSubSubCategory] = useState<string | null>(null)
@@ -133,11 +134,10 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                       setSelectedSubCategory(null)
                       setSelectedSubSubCategory(null)
                     }}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
-                      selectedCategory === null && selectedSubCategory === null && selectedSubSubCategory === null
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-all ${selectedCategory === null && selectedSubCategory === null && selectedSubSubCategory === null
                         ? "bg-[var(--color-primary)] text-white font-semibold"
                         : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
-                    }`}
+                      }`}
                   >
                     All Products
                   </button>
@@ -149,11 +149,10 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                           setSelectedSubCategory(null)
                           setSelectedSubSubCategory(null)
                         }}
-                        className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
-                          selectedCategory === category && selectedSubCategory === null && selectedSubSubCategory === null
+                        className={`w-full text-left px-4 py-3 rounded-lg transition-all ${selectedCategory === category && selectedSubCategory === null && selectedSubSubCategory === null
                             ? "bg-[var(--color-primary)] text-white font-semibold"
                             : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
-                        }`}
+                          }`}
                       >
                         {category}
                       </button>
@@ -165,11 +164,10 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                                 setSelectedSubCategory(subCat)
                                 setSelectedSubSubCategory(null)
                               }}
-                              className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm ${
-                                selectedSubCategory === subCat && selectedSubSubCategory === null
+                              className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm ${selectedSubCategory === subCat && selectedSubSubCategory === null
                                   ? "bg-[var(--color-primary)] text-white font-semibold"
                                   : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
-                              }`}
+                                }`}
                             >
                               {subCat}
                             </button>
@@ -178,11 +176,10 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                                 <button
                                   key={subSub}
                                   onClick={() => setSelectedSubSubCategory(subSub)}
-                                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-xs ml-4 ${
-                                    selectedSubSubCategory === subSub
+                                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-xs ml-4 ${selectedSubSubCategory === subSub
                                       ? "bg-[var(--color-primary)] text-white font-semibold"
                                       : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
-                                  }`}
+                                    }`}
                                 >
                                   {subSub}
                                 </button>
@@ -216,17 +213,20 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                       variants={cardItem}
                       whileHover={{ scale: 1.02, borderColor: "var(--color-primary)" }}
                       whileTap={{ scale: 0.98 }}
+                      onClick={() => router.push(`/products/${generateSlug(product.Name)}`)}
                       className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-6 cursor-pointer group overflow-hidden flex flex-col"
                       style={{ transition: "border-color 0.3s ease, transform 0.2s ease" }}
                     >
                       <div className="text-5xl mb-4 group-hover:scale-105 transition-transform">
+                         
                         <div className="w-full h-32 flex items-center justify-center">
-                          <img
-                            src={product["Image-link"] || "/placeholder.svg"}
-                            alt={product.Name}
-                            className="max-h-full object-contain"
-                          />
+                            <img
+                              src={product["Image-link"] || "/placeholder.svg"}
+                              alt={product.Name}
+                              className="max-h-full object-contain"
+                            />
                         </div>
+                        
                       </div>
                       <h3 className="text-lg font-semibold mb-2 text-[var(--color-text-primary)] group-hover:text-[var(--color-primary)] transition-colors">
                         {product.Name}
@@ -234,28 +234,21 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                       <p className="text-sm text-[var(--color-text-secondary)] mb-3 w-full text-ellipsis overflow-hidden text-nowrap">
                         {product.Composition}
                       </p>
-                      <div className="flex flex-col md:flex-row items-center justify-between gap-2 pt-4 border-t border-[var(--color-border)]">
+                      <div className="flex items-center pt-4 border-t border-[var(--color-border)] mt-auto">
                         <span className="inline-block px-3 py-1 text-xs font-medium bg-[var(--color-secondary)] text-white rounded-full">
                           {product.Category}
                         </span>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            openModal(product)
-                          }}
-                          className="hover:text-[var(--color-primary-hover)] transition-colors"
-                        >
-                          <span className="text-sm font-bold text-[var(--color-primary)]">Know More</span>
-                        </button>
                       </div>
-                      <Link href={`/products/${generateSlug(product.Name)}`}>
-                        <button
-                          className="w-full mt-4 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white py-2 rounded-lg font-medium"
-                          style={{ transition: "background-color 0.3s ease" }}
-                        >
-                          View Details
-                        </button>
-                      </Link>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          openModal(product)
+                        }}
+                        className="mt-3 w-full flex items-center justify-center gap-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] active:scale-95 text-white py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-red-200 cursor-pointer group/btn"
+                      >
+                        <Send size={14} className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                        Send Enquiry
+                      </button>
                     </motion.div>
                   ))}
                 </motion.div>
