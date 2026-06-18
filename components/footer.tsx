@@ -52,7 +52,7 @@ export default function Footer() {
                 <FaWhatsapp size={22} />
               </a>
               <a
-                href="https://www.facebook.com/biolexa"
+                href="https://www.facebook.com/people/BioLexa-A-Division-of-Odin-Healthcare/61589317261799/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -61,7 +61,7 @@ export default function Footer() {
                 <ImFacebook2 size={22} />
               </a>
               <a
-                href="https://www.instagram.com/biolexa"
+                href="https://www.instagram.com/biolexa_/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

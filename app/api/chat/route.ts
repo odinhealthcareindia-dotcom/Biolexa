@@ -11,7 +11,7 @@ ABOUT BIOLEXA:
 - Email: biolexaindia@gmail.com
 - WhatsApp: https://wa.me/9218630464
 - Facebook: https://www.facebook.com/people/BioLexa-A-Division-of-Odin-Healthcare/61589317261799/
-- Instagram: hhttps://www.instagram.com/biolexa_/
+- Instagram: https://www.instagram.com/biolexa_/
 
 WHAT IS PCD PHARMA FRANCHISE?
 PCD stands for Propaganda Cum Distribution. It means BioLexa gives franchise rights to individuals or small companies to sell BioLexa products in their region using BioLexa's brand name. Benefits include: low investment, monopoly rights in your area, marketing support, and high profit margins.
