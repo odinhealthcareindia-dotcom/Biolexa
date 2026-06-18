@@ -314,7 +314,7 @@ export default function Home() {
               className="flex-1"
             >
               <img
-                src="https://i.ibb.co/tw4nQxMm/product-image.png"
+                src="https://i.ibb.co/j9ws959t/biolexa-hero.png"
                 alt="BioLexa pharmaceuticals — product and franchise overview"
                 className="w-full h-auto rounded-xl shadow-md object-cover"
               />
