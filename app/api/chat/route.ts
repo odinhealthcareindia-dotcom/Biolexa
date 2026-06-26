@@ -94,10 +94,10 @@ ORALS - TABLETS:
     - Use: Antibiotic + antiprotozoal — GI infections, bacterial vaginosis
     - URL: https://biolexa.in/products/lexaflox-oz
 
-16. SENIPOD-200
+16. SINPOD-200
     - Composition: Cefpodoxime Proxetil 200mg
     - Use: 3rd gen cephalosporin antibiotic — ear, throat, respiratory, skin
-    - URL: https://biolexa.in/products/senipod-200
+    - URL: https://biolexa.in/products/sinpod-200
 
 17. LEXACID-20
     - Composition: Rabeprazole Sodium 20mg

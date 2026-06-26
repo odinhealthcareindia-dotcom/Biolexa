@@ -148,7 +148,7 @@ const PRODUCTS = [
     "Category": "Orals ",
     "Sub-category": "TABLETS",
     "Sub-Sub-Category": "Anti-Biotic",
-    "Name": "SENIPOD-200",
+    "Name": "SINPOD-200",
     "Composition": "Cefpodoxime Proxetil 200mg",
     "Packing": "10x10 Alu Alu ",
     "Mrp": 3100.0,
