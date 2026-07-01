@@ -2,12 +2,14 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
 import { Toaster } from "react-hot-toast"
-import CollapsibleDownloadButton from "@/components/collapsible-download-button"
 import { ThemeProvider } from "@/components/theme-provider"
-import ChatBot from "@/components/ChatBot"
+import LayoutOverlays from "@/components/LayoutOverlays"
+
+// Sanity imports
+import { getSiteSettings, getNavigation } from "@/lib/sanity/queries"
+import { urlFor } from "@/lib/sanity/image"
+import { SanityLive } from "@/lib/sanity/live"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,14 +17,15 @@ const inter = Inter({
   variable: "--font-inter",
 })
 
-export const metadata: Metadata = {
-  title: {
-    default: "BioLexa | Intelligent Healthcare Solutions",
-    template: "%s | BioLexa",
-  },
-  description:
-    "BioLexa delivers cutting-edge healthcare technology and intelligent solutions for modern medical professionals. GMP & ISO certified pharmaceutical partner.",
-  keywords: [
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings()
+
+  const siteName = settings?.siteName || "BioLexa"
+  const defaultTitle = settings?.seo?.metaTitle || `${siteName} | Intelligent Healthcare Solutions`
+  const defaultDesc = settings?.seo?.metaDescription || settings?.tagline || 
+    "BioLexa delivers cutting-edge healthcare technology and intelligent solutions for modern medical professionals. GMP & ISO certified pharmaceutical partner."
+  
+  const keywords = settings?.seo?.keywords || [
     "BioLexa",
     "intelligent healthcare",
     "pharmaceutical products",
@@ -34,55 +37,98 @@ export const metadata: Metadata = {
     "ISO certified",
     "pharmaceutical distributor",
     "medicine supplier",
-  ],
-  generator: "v0.app",
-  robots: "index, follow",
-  authors: [{ name: "BioLexa" }],
-  creator: "BioLexa",
-  publisher: "BioLexa",
-  formatDetection: {
-    email: true,
-    telephone: true,
-    address: true,
-  },
-  openGraph: {
-    title: "BioLexa | Intelligent Healthcare Solutions",
-    description: "Cutting-edge healthcare technology and intelligent solutions for modern medical professionals.",
-    url: "https://biolexa.in",
-    siteName: "BioLexa",
-    type: "website",
-    locale: "en_IN",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "BioLexa - Intelligent Healthcare Solutions",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "BioLexa | Intelligent Healthcare Solutions",
-    description: "Intelligent healthcare technology from BioLexa",
-    creator: "@biolexa",
-    images: ["/twitter-image.jpg"],
-  },
-  alternates: {
-    canonical: "https://biolexa.in",
-  },
-  icons: {
-    icon: '/favicon.ico',          // standard favicon
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png', // iOS home screen icon
-  },
+  ]
+
+  const shareImage = settings?.seo?.shareImage 
+    ? urlFor(settings.seo.shareImage).width(1200).height(630).url()
+    : "/og-image.jpg"
+
+  return {
+    title: {
+      default: defaultTitle,
+      template: `%s | ${siteName}`,
+    },
+    description: defaultDesc,
+    keywords,
+    robots: "index, follow",
+    authors: [{ name: siteName }],
+    creator: siteName,
+    publisher: siteName,
+    formatDetection: {
+      email: true,
+      telephone: true,
+      address: true,
+    },
+    openGraph: {
+      title: defaultTitle,
+      description: defaultDesc,
+      url: "https://biolexa.in",
+      siteName,
+      type: "website",
+      locale: "en_IN",
+      images: [
+        {
+          url: shareImage,
+          width: 1200,
+          height: 630,
+          alt: `${siteName} - Intelligent Healthcare Solutions`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: defaultTitle,
+      description: defaultDesc,
+      images: [shareImage],
+    },
+    alternates: {
+      canonical: "https://biolexa.in",
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon-16x16.png",
+      apple: "/apple-touch-icon.png",
+    },
+  }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const settings = await getSiteSettings()
+  const navigation = await getNavigation("main-menu")
+
+  // Fallback values for Structured Data
+  const siteName = settings?.siteName || "BioLexa"
+  const phone = settings?.phoneNumbers?.[0] || "+919218630464"
+  const email = settings?.email || "biolexaindia@gmail.com"
+  const addressText = settings?.address || "Plot no : 1, Chambaghat, Industrial area, Solan, Himachal Pradesh 173213"
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: siteName,
+    description: settings?.tagline || "Intelligent Healthcare Solutions and Pharmaceutical Products",
+    url: "https://biolexa.in",
+    telephone: phone.replace(/\s/g, ""),
+    email: email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Plot no : 1",
+      addressLocality: "Chambaghat, Industrial area, Solan",
+      addressRegion: "Himachal Pradesh",
+      postalCode: "173213",
+      addressCountry: "IN",
+    },
+    sameAs: [
+      settings?.socials?.facebook || "https://www.facebook.com/biolexa",
+      settings?.socials?.instagram,
+      settings?.socials?.linkedin,
+    ].filter(Boolean),
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -94,24 +140,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              name: "BioLexa",
-              description: "Intelligent Healthcare Solutions and Pharmaceutical Products",
-              url: "https://biolexa.in",
-              telephone: "+919218630464",
-              email: "biolexaindia@gmail.com",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Plot no : 1",
-                addressLocality: "Chambaghat, Industrial area, Solan",
-                addressRegion: "Himachal Pradesh",
-                postalCode: "173213",
-                addressCountry: "IN",
-              },
-              sameAs: ["https://www.facebook.com/biolexa"],
-            }),
+            __html: JSON.stringify(structuredData),
           }}
         />
       </head>
@@ -123,13 +152,14 @@ export default function RootLayout({
           storageKey="biolexa_theme"
           disableTransitionOnChange={false}
         >
-          <Navigation />
-          {children}
+          <LayoutOverlays settings={settings} navigation={navigation}>
+            {children}
+          </LayoutOverlays>
           <Toaster position="top-right" />
-          <CollapsibleDownloadButton />
-          <Footer />
-          <ChatBot />
         </ThemeProvider>
+        
+        {/* Mount SanityLive to enable live-preview refresh loops */}
+        <SanityLive />
       </body>
     </html>
   )

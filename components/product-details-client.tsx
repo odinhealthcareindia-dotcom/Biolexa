@@ -266,7 +266,7 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
               <h2 className="text-2xl font-bold mb-8 text-[var(--color-text-primary)]">Visual Aid</h2>
               <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-8 flex flex-col items-center">
                 <img
-                  src={product["Visual-aid"]}
+                  src={product["Visual-aid"] || undefined}
                   alt="Visual aid"
                   className="max-w-full h-auto max-h-96 object-contain rounded-lg mb-4"
                 />
