@@ -62,6 +62,9 @@ export default defineConfig({
             S.documentTypeListItem("author").title("Authors"),
             S.documentTypeListItem("category").title("Blog Categories"),
             S.documentTypeListItem("tag").title("Blog Tags"),
+            S.divider(),
+            // Leads & Subscriptions
+            S.documentTypeListItem("lead").title("Leads & Subscribers"),
           ]),
     }),
     visionTool(),
