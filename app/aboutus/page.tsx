@@ -10,10 +10,7 @@ export const revalidate = 60
 export default async function AboutUs() {
   const data = await getAboutpage()
 
-  // if (!data || !data.sections || data.sections.length === 0) {
-  //   return <StaticAbout />
-  // }
-  if (true) {
+  if (!data || !data.sections || data.sections.length === 0) {
     return <StaticAbout />
   }
 
