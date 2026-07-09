@@ -6,6 +6,7 @@ export { metadata } from "./metadata"
 
 export const revalidate = 60
 
+// Trigger next.js dev server recompile
 export default async function BlogPage() {
   const sanityPosts = await getAllPosts()
 

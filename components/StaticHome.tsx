@@ -128,10 +128,10 @@ export default function StaticHome() {
 
   const heroSlides = [
     {
-      title: "Intelligent Healthcare Solutions",
+      title: "Advancing Healthcare Through Innovation",
       description:
-        "BioLexa delivers cutting-edge pharmaceutical products with trusted certifications and excellence in every formulation.",
-      image: "https://i.ibb.co/Qv5WPN6p/New-Project.jpg",
+        "We combine scientific excellence, trusted quality, and customer-focused solutions to deliver medicines that improve lives and create healthier communities across India.",
+      image: "https://i.ibb.co/HLwcFPyz/Biolexa-headquaters-banner.jpg",
       ctaText: "Explore Products",
       ctaLink: "/products",
     },
@@ -147,7 +147,7 @@ export default function StaticHome() {
       title: "A Wide Range of Products",
       description:
         "Extensive portfolio of pharmaceutical products across multiple categories for all your healthcare needs.",
-      image: "https://i.ibb.co/V0jvtgFs/Chat-GPT-Image-Dec-11-2025-11-37-35-AM.png",
+      image: "https://i.ibb.co/4ZFFjd0Y/wide-product.png",
       ctaText: "View Catalog",
       ctaLink: "/products",
     },

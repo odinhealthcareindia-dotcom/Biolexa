@@ -7,6 +7,13 @@ import Link from "next/link"
 
 const ease = [0.25, 0.1, 0.25, 1] as const
 
+function formatDate(dateStr: string) {
+  const date = new Date(dateStr)
+  if (isNaN(date.getTime())) return ""
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  return `${months[date.getUTCMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`
+}
+
 export interface MappedPost {
   id: string
   title: string
@@ -47,6 +54,7 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
 
   const filteredArticles = useMemo(() => {
     return posts.filter((article) => {
+      debugger
       const matchesCategory = !selectedCategory || article.categoryName === selectedCategory
       const matchesSearch =
         article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -56,25 +64,40 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
   }, [posts, selectedCategory, searchTerm])
 
   const featuredArticles = useMemo(() => posts.filter((a) => a.featured), [posts])
-  const regularArticles = useMemo(() => filteredArticles.filter((a) => !a.featured), [filteredArticles])
+  const regularArticles = useMemo(() => {
+    if (selectedCategory || searchTerm) {
+      return filteredArticles
+    }
+    return filteredArticles.filter((a) => !a.featured)
+  }, [filteredArticles, selectedCategory, searchTerm])
 
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       {/* Header Section */}
-      <section className="bg-[var(--color-secondary)] text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
         <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[var(--color-primary)]/20 via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto relative">
+        <div className="max-w-7xl mx-auto relative text-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-              Healthcare & <span className="text-[var(--color-primary)]">Wellness</span> Blog
-            </h1>
-            <p className="text-white/80 text-lg max-w-2xl">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease }}
+              className="text-4xl sm:text-5xl font-bold mb-4 text-[var(--color-text-primary)]"
+            >
+              Healthcare & <span className="text-[var(--color-primary)]">Wellness Blog</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease }}
+              className="text-[var(--color-text-secondary)] text-lg max-w-2xl mx-auto"
+            >
               Insights, tips, and industry updates from BioLexa pharmaceutical experts.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </section>
@@ -143,11 +166,7 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                         </span>
                         <span className="flex items-center gap-1">
                           <Calendar size={14} />
-                          {new Date(article.date).toLocaleDateString(undefined, {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          })}
+                          {formatDate(article.date)}
                         </span>
                       </div>
                       <ArrowRight size={18} className="text-[var(--color-primary)] group-hover:translate-x-1 transition-transform" />
@@ -197,11 +216,10 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                 <div className="space-y-2">
                   <button
                     onClick={() => setSelectedCategory(null)}
-                    className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
-                      selectedCategory === null
-                        ? "bg-[var(--color-primary)] text-white font-semibold"
-                        : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
-                    }`}
+                    className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${selectedCategory === null
+                      ? "bg-[var(--color-primary)] text-white font-semibold"
+                      : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
+                      }`}
                   >
                     All Articles
                   </button>
@@ -209,11 +227,10 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
-                        selectedCategory === category
-                          ? "bg-[var(--color-primary)] text-white font-semibold"
-                          : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
-                      }`}
+                      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${selectedCategory === category
+                        ? "bg-[var(--color-primary)] text-white font-semibold"
+                        : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
+                        }`}
                     >
                       {category}
                     </button>
@@ -277,11 +294,7 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                                 </span>
                                 <span className="flex items-center gap-1">
                                   <Calendar size={14} />
-                                  {new Date(article.date).toLocaleDateString(undefined, {
-                                    year: "numeric",
-                                    month: "short",
-                                    day: "numeric",
-                                  })}
+                                  {formatDate(article.date)}
                                 </span>
                                 <span className="flex items-center gap-1">
                                   <Clock size={14} />

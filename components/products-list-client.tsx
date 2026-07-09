@@ -73,20 +73,30 @@ export default function ProductsListClient({ products }: ProductsListClientProps
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       {/* Header Section */}
-      <section className="bg-[var(--color-secondary)] text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
         <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[var(--color-primary)]/20 via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto relative">
+        <div className="max-w-7xl mx-auto relative text-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-[var(--color-primary)]">
-              Our Product Catalog
-            </h1>
-            <p className="text-white/80 text-lg max-w-2xl">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease }}
+              className="text-4xl sm:text-5xl font-bold mb-4 text-[var(--color-text-primary)]"
+            >
+              Our Product <span className="text-[var(--color-primary)]">Catalog</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease }}
+              className="text-[var(--color-text-secondary)] text-lg max-w-2xl mx-auto"
+            >
               Browse the BioLexa range of pharmaceutical products.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </section>
@@ -135,8 +145,8 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                       setSelectedSubSubCategory(null)
                     }}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-all ${selectedCategory === null && selectedSubCategory === null && selectedSubSubCategory === null
-                        ? "bg-[var(--color-primary)] text-white font-semibold"
-                        : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
+                      ? "bg-[var(--color-primary)] text-white font-semibold"
+                      : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
                       }`}
                   >
                     All Products
@@ -150,8 +160,8 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                           setSelectedSubSubCategory(null)
                         }}
                         className={`w-full text-left px-4 py-3 rounded-lg transition-all ${selectedCategory === category && selectedSubCategory === null && selectedSubSubCategory === null
-                            ? "bg-[var(--color-primary)] text-white font-semibold"
-                            : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
+                          ? "bg-[var(--color-primary)] text-white font-semibold"
+                          : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
                           }`}
                       >
                         {category}
@@ -165,8 +175,8 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                                 setSelectedSubSubCategory(null)
                               }}
                               className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm ${selectedSubCategory === subCat && selectedSubSubCategory === null
-                                  ? "bg-[var(--color-primary)] text-white font-semibold"
-                                  : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
+                                ? "bg-[var(--color-primary)] text-white font-semibold"
+                                : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
                                 }`}
                             >
                               {subCat}
@@ -177,8 +187,8 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                                   key={subSub}
                                   onClick={() => setSelectedSubSubCategory(subSub)}
                                   className={`w-full text-left px-4 py-2 rounded-lg transition-all text-xs ml-4 ${selectedSubSubCategory === subSub
-                                      ? "bg-[var(--color-primary)] text-white font-semibold"
-                                      : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
+                                    ? "bg-[var(--color-primary)] text-white font-semibold"
+                                    : "hover:bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]"
                                     }`}
                                 >
                                   {subSub}
@@ -218,15 +228,15 @@ export default function ProductsListClient({ products }: ProductsListClientProps
                       style={{ transition: "border-color 0.3s ease, transform 0.2s ease" }}
                     >
                       <div className="text-5xl mb-4 group-hover:scale-105 transition-transform">
-                         
+
                         <div className="w-full h-32 flex items-center justify-center">
-                            <img
-                              src={product["Image-link"] || "/placeholder.svg"}
-                              alt={product.Name}
-                              className="max-h-full object-contain"
-                            />
+                          <img
+                            src={product["Image-link"] || "/placeholder.svg"}
+                            alt={product.Name}
+                            className="max-h-full object-contain"
+                          />
                         </div>
-                        
+
                       </div>
                       <h3 className="text-lg font-semibold mb-2 text-[var(--color-text-primary)] group-hover:text-[var(--color-primary)] transition-colors">
                         {product.Name}
