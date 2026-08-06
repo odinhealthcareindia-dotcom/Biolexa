@@ -10,12 +10,17 @@ import LayoutOverlays from "@/components/LayoutOverlays"
 import { getSiteSettings, getNavigation } from "@/lib/sanity/queries"
 import { urlFor } from "@/lib/sanity/image"
 import { SanityLive } from "@/lib/sanity/live"
+import Clarity from '@microsoft/clarity';
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
 })
+
+const projectId = "xy4wxev1u6"
+
+Clarity.init(projectId);
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings()
