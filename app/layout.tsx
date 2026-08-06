@@ -22,9 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const siteName = settings?.siteName || "BioLexa"
   const defaultTitle = settings?.seo?.metaTitle || `${siteName} | Intelligent Healthcare Solutions`
-  const defaultDesc = settings?.seo?.metaDescription || settings?.tagline || 
+  const defaultDesc = settings?.seo?.metaDescription || settings?.tagline ||
     "BioLexa delivers cutting-edge healthcare technology and intelligent solutions for modern medical professionals. GMP & ISO certified pharmaceutical partner."
-  
+
   const keywords = settings?.seo?.keywords || [
     "BioLexa",
     "intelligent healthcare",
@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     "medicine supplier",
   ]
 
-  const shareImage = settings?.seo?.shareImage 
+  const shareImage = settings?.seo?.shareImage
     ? urlFor(settings.seo.shareImage).width(1200).height(630).url()
     : "/og-image.jpg"
 
@@ -143,6 +143,18 @@ export default async function RootLayout({
             __html: JSON.stringify(structuredData),
           }}
         />
+        <script
+          id="microsoft-clarity"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "xy4wxev1u6");
+            `
+          }}
+        />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider
@@ -157,7 +169,7 @@ export default async function RootLayout({
           </LayoutOverlays>
           <Toaster position="top-right" />
         </ThemeProvider>
-        
+
         {/* Mount SanityLive to enable live-preview refresh loops */}
         <SanityLive />
       </body>
